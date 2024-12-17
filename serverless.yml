@@ -1,0 +1,68 @@
+org: edudev
+app: examen-eduardo
+service: starwars-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-2
+  stage: dev
+  environment:
+    NODE_ENV: ${opt:stage, 'dev'}
+
+functions:
+  app:
+    handler: src/app.handler
+    timeout: 29
+    events:
+      - http:
+          path: characters/internal
+          method: get
+          cors: true
+      - http:
+          path: characters/internal/{id}
+          method: get
+          cors: true
+      - http:
+          path: characters/external
+          method: get
+          cors: true
+      - http:
+          path: characters/external/{id}
+          method: get
+          cors: true
+      - http:
+          path: planets/internal
+          method: get
+          cors: true
+      - http:
+          path: planets/internal/{id}
+          method: get
+          cors: true
+      - http:
+          path: planets/external
+          method: get
+          cors: true
+      - http:
+          path: planets/external/{id}
+          method: get
+          cors: true
+      - http:
+          path: api-docs
+          method: get
+          cors: true
+      - http:
+          path: characters/internal
+          method: post
+          cors: true
+      - http:
+          path: planets/internal
+          method: post
+          cors: true
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    stage: ${opt:stage, 'dev'}
+    port: 3000

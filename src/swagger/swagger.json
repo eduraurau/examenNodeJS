@@ -1,0 +1,131 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Star Wars API",
+    "version": "1.0.0",
+    "description": "API para gestionar personajes y planetas del universo Star Wars."
+  },
+  "paths": {
+    "/characters": {
+      "get": {
+        "summary": "Obtener todos los personajes",
+        "responses": {
+          "200": {
+            "description": "Lista de personajes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo personaje",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Character"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Personaje creado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/planets": {
+      "get": {
+        "summary": "Obtener todos los planetas",
+        "responses": {
+          "200": {
+            "description": "Lista de planetas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Planet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo planeta",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Planet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Planeta creado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Planet"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Character": {
+        "type": "object",
+        "properties": {
+          "nombre": { "type": "string" },
+          "altura": { "type": "string" },
+          "masa": { "type": "string" },
+          "colorCabello": { "type": "string" },
+          "colorPiel": { "type": "string" },
+          "colorOjos": { "type": "string" },
+          "añoNacimiento": { "type": "string" },
+          "genero": { "type": "string" }
+        }
+      },
+      "Planet": {
+        "type": "object",
+        "properties": {
+          "nombre": { "type": "string" },
+          "rotacion": { "type": "string" },
+          "orbital": { "type": "string" },
+          "diametro": { "type": "string" },
+          "clima": { "type": "string" },
+          "gravedad": { "type": "string" },
+          "terreno": { "type": "string" },
+          "agua": { "type": "string" },
+          "poblacion": { "type": "string" }
+        }
+      }
+    }
+  }
+}
